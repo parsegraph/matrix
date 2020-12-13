@@ -1,8 +1,8 @@
 var assert = require("assert");
-import todo from "../dist/TODO-PACKAGE-NAME";
+import {generateRectangleVertices} from "../dist/matrix";
 
-describe("Package", function () {
+describe("generateRectangleVertices", function () {
   it("works", ()=>{
-    assert.equal(todo(), 42);
+    assert.ok(generateRectangleVertices(10, 10, 100, 100));
   });
 });
