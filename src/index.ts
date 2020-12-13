@@ -209,9 +209,6 @@ export function midPoint(x1, y1, x2, y2) {
 }
 
 export function make2DProjection(width, height, flipVertical) {
-  if (flipVertical === undefined) {
-    flipVertical = VFLIP;
-  }
   flipVertical = flipVertical === true;
   // console.log("Making 2D projection (flipVertical=" + flipVertical + ")");
   flipVertical = flipVertical ? -1 : 1;
