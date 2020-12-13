@@ -208,9 +208,22 @@ export function midPoint(x1, y1, x2, y2) {
   return [x1 + (x2 - x1) * 0.5, y1 + (y2 - y1) * 0.5];
 }
 
+let vflip = false;
+export function getVFlip() {
+  return vflip;
+}
+
+export function setVFlip(value) {
+  vflip = !!value;
+}
+
+export function flipVFlip() {
+  vflip = !value;
+}
+
 export function make2DProjection(width, height, flipVertical) {
   if (flipVertical === undefined) {
-    flipVertical = VFLIP;
+    flipVertical = getVFlip();
   }
   flipVertical = flipVertical === true;
   // console.log("Making 2D projection (flipVertical=" + flipVertical + ")");
