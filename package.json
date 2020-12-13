@@ -1,6 +1,6 @@
 {
   "name": "parsegraph-matrix",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "matrix",
   "main": "dist/matrix.js",
   "scripts": {
