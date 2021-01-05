@@ -1,8 +1,12 @@
+type Matrix3x3 = number[]|Float32Array;
+type Matrix4x4 = number[]|Float32Array;
+type Vector3D = number[]|Float32Array;
+
 /*
  * Returns a list of 2-D vertex coordinates that will create
  * a rectangle, centered at the specified position.
  */
-export function generateRectangleVertices(x, y, w, h) {
+export function generateRectangleVertices(x:number, y:number, w:number, h:number):number[] {
   return [
     x - w / 2,
     y - h / 2,
@@ -20,7 +24,7 @@ export function generateRectangleVertices(x, y, w, h) {
   ];
 }
 
-export function getVerts(width, length, height) {
+export function getVerts(width:number, length:number, height:number):number[][] {
   return [
     // Front
     [-width, length, height], // v0
@@ -60,11 +64,11 @@ export function getVerts(width, length, height) {
   ];
 }
 
-export function generateRectangleTexcoords() {
+export function generateRectangleTexcoords():number[] {
   return [0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1];
 }
 
-export function matrixIdentity3x3() {
+export function matrixIdentity3x3():Matrix3x3 {
   const arr = new Float32Array(9);
   arr[0] = 1;
   arr[4] = 1;
@@ -72,7 +76,7 @@ export function matrixIdentity3x3() {
   return arr;
 }
 
-export function matrixCopy3x3(src) {
+export function matrixCopy3x3(src:Matrix3x3):Matrix3x3 {
   return [
     src[0],
     src[1],
@@ -86,7 +90,7 @@ export function matrixCopy3x3(src) {
   ];
 }
 
-export function matrixMultiply3x3(...args) {
+export function matrixMultiply3x3(...args:Matrix3x3[]):Matrix3x3 {
   if (args.length === 0) {
     throw new Error('At least two matrices must be provided.');
   }
@@ -115,7 +119,7 @@ export function matrixMultiply3x3(...args) {
   return rv;
 }
 
-export function matrixMultiply3x3I(dest, a, b) {
+export function matrixMultiply3x3I(dest:Matrix3x3, a:Matrix3x3, b:Matrix3x3):Matrix3x3 {
   return matrixSet3x3(
       dest,
       a[0] * b[0] + a[1] * b[3] + a[2] * b[6],
@@ -130,35 +134,35 @@ export function matrixMultiply3x3I(dest, a, b) {
   );
 }
 
-export function matrixTransform2D(world, x, y) {
+export function matrixTransform2D(world:Matrix3x3, x:number, y:number):Matrix3x3 {
   return [
     world[0] * x + world[1] * y + world[2],
     world[3] * x + world[4] * y + world[5],
   ];
 }
 
-export function makeTranslation3x3(tx, ty) {
+export function makeTranslation3x3(tx:number, ty:number):Matrix3x3 {
   return makeTranslation3x3I(matrixIdentity3x3(), tx, ty);
 }
 
-export function makeTranslation3x3I(dest, tx, ty) {
+export function makeTranslation3x3I(dest:Matrix3x3, tx:number, ty:number):Matrix3x3 {
   return matrixSet3x3(dest, 1, 0, 0, 0, 1, 0, tx, ty, 1);
 }
 
-export function makeRotation3x3(angleInRadians) {
+export function makeRotation3x3(angleInRadians:number):Matrix3x3 {
   const c = Math.cos(angleInRadians);
   const s = Math.sin(angleInRadians);
   return [c, -s, 0, s, c, 0, 0, 0, 1];
 }
 
-export function makeScale3x3(sx, sy) {
+export function makeScale3x3(sx:number, sy:number):Matrix3x3 {
   if (arguments.length === 1) {
     sy = sx;
   }
   return makeScale3x3I(matrixIdentity3x3(), sx, sy);
 }
 
-export function matrixSet3x3(dest, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
+export function matrixSet3x3(dest:Matrix3x3, a1:number, a2:number, a3:number, a4:number, a5:number, a6:number, a7:number, a8:number, a9:number):Matrix3x3 {
   dest[0] = a1;
   dest[1] = a2;
   dest[2] = a3;
@@ -171,7 +175,7 @@ export function matrixSet3x3(dest, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
   return dest;
 }
 
-export function makeScale3x3I(dest, sx, sy) {
+export function makeScale3x3I(dest:Matrix3x3, sx:number, sy:number):Matrix3x3 {
   if (arguments.length === 2) {
     sy = sx;
   }
@@ -179,8 +183,8 @@ export function makeScale3x3I(dest, sx, sy) {
 }
 
 // http://stackoverflow.com/questions/983999/simple-3x3-matrix-inverse-code-c
-export function makeInverse3x3(input) {
-  const m = function(col, row) {
+export function makeInverse3x3(input:Matrix3x3):Matrix3x3 {
+  const m = function(col:number, row:number):number {
     return input[row * 3 + col];
   };
   // computes the inverse of a matrix m
@@ -204,48 +208,48 @@ export function makeInverse3x3(input) {
   ];
 }
 
-export function midPoint(x1, y1, x2, y2) {
+export function midPoint(x1:number, y1:number, x2:number, y2:number):number[] {
   return [x1 + (x2 - x1) * 0.5, y1 + (y2 - y1) * 0.5];
 }
 
 let vflip = false;
-export function getVFlip() {
+export function getVFlip():boolean {
   return vflip;
 }
 
-export function setVFlip(value) {
+export function setVFlip(value:boolean):void {
   vflip = !!value;
 }
 
-export function flipVFlip() {
-  vflip = !value;
+export function flipVFlip():void {
+  vflip = !vflip;
 }
 
-export function make2DProjection(width, height, flipVertical) {
+export function make2DProjection(width:number, height:number, flipVertical?:boolean):Matrix3x3 {
   if (flipVertical === undefined) {
     flipVertical = getVFlip();
   }
   flipVertical = flipVertical === true;
   // console.log("Making 2D projection (flipVertical=" + flipVertical + ")");
-  flipVertical = flipVertical ? -1 : 1;
+  const flipSign = flipVertical ? -1 : 1;
   return [
     2 / width,
     0,
     0,
     0,
-    -2 / (flipVertical * height),
+    -2 / (flipSign * height),
     0,
     -1,
-    flipVertical,
+    flipSign,
     1,
   ];
 }
 
-export function subtractVectors3D(a, b) {
+export function subtractVectors3D(a:Vector3D, b:Vector3D):Vector3D {
   return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 }
 
-export function normalize3D(v) {
+export function normalize3D(v:Vector3D):Vector3D {
   const length = Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
   // make sure we don't divide by 0.
   if (length > 0.00001) {
@@ -255,7 +259,7 @@ export function normalize3D(v) {
   }
 }
 
-export function cross3D(a, b) {
+export function cross3D(a:Vector3D, b:Vector3D):Vector3D {
   return [
     a[1] * b[2] - a[2] * b[1],
     a[2] * b[0] - a[0] * b[2],
@@ -263,7 +267,7 @@ export function cross3D(a, b) {
   ];
 }
 
-export function makePerspective(fieldOfViewInRadians, aspect, near, far) {
+export function makePerspective(fieldOfViewInRadians:number, aspect:number, near:number, far:number):Matrix4x4 {
   const f = Math.tan(Math.PI * 0.5 - 0.5 * fieldOfViewInRadians);
   const rangeInv = 1.0 / (near - far);
 
@@ -287,35 +291,35 @@ export function makePerspective(fieldOfViewInRadians, aspect, near, far) {
   ];
 }
 
-export function makeTranslation4x4(tx, ty, tz) {
+export function makeTranslation4x4(tx:number, ty:number, tz:number):Matrix4x4 {
   return [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, tx, ty, tz, 1];
 }
 
-export function makeXRotation(angleInRadians) {
+export function makeXRotation(angleInRadians:number):Matrix4x4 {
   const c = Math.cos(angleInRadians);
   const s = Math.sin(angleInRadians);
 
   return [1, 0, 0, 0, 0, c, s, 0, 0, -s, c, 0, 0, 0, 0, 1];
 }
 
-export function makeYRotation(angleInRadians) {
+export function makeYRotation(angleInRadians:number):Matrix4x4 {
   const c = Math.cos(angleInRadians);
   const s = Math.sin(angleInRadians);
 
   return [c, 0, -s, 0, 0, 1, 0, 0, s, 0, c, 0, 0, 0, 0, 1];
 }
 
-export function makeZRotation(angleInRadians) {
+export function makeZRotation(angleInRadians:number):Matrix4x4 {
   const c = Math.cos(angleInRadians);
   const s = Math.sin(angleInRadians);
   return [c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 }
 
-export function makeScale4x4(sx, sy, sz) {
+export function makeScale4x4(sx:number, sy:number, sz:number):Matrix4x4 {
   return [sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, sz, 0, 0, 0, 0, 1];
 }
 
-export function matrixMultiply4x4(a, b) {
+export function matrixMultiply4x4(a:Matrix4x4, b:Matrix4x4):Matrix4x4 {
   const a00 = a[0 * 4 + 0];
   const a01 = a[0 * 4 + 1];
   const a02 = a[0 * 4 + 2];
@@ -368,7 +372,7 @@ export function matrixMultiply4x4(a, b) {
   ];
 }
 
-export function makeInverse4x4(m) {
+export function makeInverse4x4(m:Matrix4x4):Matrix4x4 {
   const m00 = m[0 * 4 + 0];
   const m01 = m[0 * 4 + 1];
   const m02 = m[0 * 4 + 2];
@@ -501,7 +505,7 @@ export function makeInverse4x4(m) {
   ];
 }
 
-export function matrixVectorMultiply4x4(v, m) {
+export function matrixVectorMultiply4x4(v:Vector3D, m:Matrix4x4):Matrix4x4 {
   const dst = [];
   for (let i = 0; i < 4; ++i) {
     dst[i] = 0.0;
@@ -515,7 +519,7 @@ export function matrixVectorMultiply4x4(v, m) {
  * looks at the target, a position in 3-space, angled using the
  * up vector.
  */
-export function makeLookAt(cameraPosition, target, up) {
+export function makeLookAt(cameraPosition:Vector3D, target:Vector3D, up:Vector3D):Matrix4x4 {
   const zAxis = normalize3D(subtractVectors3D(cameraPosition, target));
   const xAxis = cross3D(up, zAxis);
   const yAxis = cross3D(zAxis, xAxis);

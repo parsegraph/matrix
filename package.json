@@ -1,8 +1,9 @@
 {
   "name": "parsegraph-matrix",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "matrix",
   "main": "dist/matrix.js",
+  "types": "dist/matrix.d.ts",
   "scripts": {
     "coverage": "nyc npm run test",
     "test": "mocha -r @babel/register -r jsdom-global/register --recursive",
@@ -54,6 +55,7 @@
     "prettier": "2.1.2",
     "source-map-loader": "^1.0.2",
     "source-map-support": "^0.5.19",
+    "ts-loader": "^8.0.14",
     "ts-node": "^9.1.1",
     "ts-shader-loader": "^1.0.6",
     "typescript": "^4.1.3",

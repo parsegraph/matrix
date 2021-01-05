@@ -1,7 +1,7 @@
 DIST_NAME = matrix
 
 SCRIPT_FILES = \
-	src/index.ts
+	src/matrix.ts
 
 all: build lint test coverage esdoc
 
