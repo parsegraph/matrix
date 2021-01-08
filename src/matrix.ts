@@ -1,6 +1,6 @@
-type Matrix3x3 = number[]|Float32Array;
-type Matrix4x4 = number[]|Float32Array;
-type Vector3D = number[]|Float32Array;
+export type Matrix3x3 = number[]|Float32Array;
+export type Matrix4x4 = number[]|Float32Array;
+export type Vector3D = number[]|Float32Array;
 
 /*
  * Returns a list of 2-D vertex coordinates that will create
