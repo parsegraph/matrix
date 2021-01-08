@@ -155,7 +155,7 @@ export function makeRotation3x3(angleInRadians:number):Matrix3x3 {
   return [c, -s, 0, s, c, 0, 0, 0, 1];
 }
 
-export function makeScale3x3(sx:number, sy:number):Matrix3x3 {
+export function makeScale3x3(sx:number, sy?:number):Matrix3x3 {
   if (arguments.length === 1) {
     sy = sx;
   }
@@ -175,7 +175,7 @@ export function matrixSet3x3(dest:Matrix3x3, a1:number, a2:number, a3:number, a4
   return dest;
 }
 
-export function makeScale3x3I(dest:Matrix3x3, sx:number, sy:number):Matrix3x3 {
+export function makeScale3x3I(dest:Matrix3x3, sx:number, sy?:number):Matrix3x3 {
   if (arguments.length === 2) {
     sy = sx;
   }
@@ -545,5 +545,3 @@ export function makeLookAt(cameraPosition:Vector3D, target:Vector3D, up:Vector3D
 }
 
 // End methods from webglfundamentals.org
-
-
