@@ -1,0 +1,17 @@
+{
+    "name": "parsegraph-matrix",
+    "version": "1.4.7",
+    "description": "matrix",
+    "main": "dist/parsegraph-matrix.js",
+    "types": "dist/parsegraph-matrix.d.ts",
+    "repository": {
+      "type": "git",
+      "url": "git+ssh://git@github.com/parsegraph/matrix.git"
+    },
+    "author": "Rainback, Inc.",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/parsegraph/matrix/issues"
+    },
+    "homepage": "https://github.com/parsegraph/matrix#readme"
+  }
