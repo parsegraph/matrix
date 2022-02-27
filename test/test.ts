@@ -1,5 +1,5 @@
 var assert = require("assert");
-import { generateRectangleVertices } from "../dist/parsegraph-matrix";
+import { generateRectangleVertices } from "../src/index";
 
 describe("generateRectangleVertices", function () {
   it("works", () => {
