@@ -1,4 +1,4 @@
-var assert = require("assert");
+const assert = require("assert");
 import { generateRectangleVertices } from "../src/index";
 
 describe("generateRectangleVertices", function () {
