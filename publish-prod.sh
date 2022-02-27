@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PUBLISH="npm pub parsegraph-matrix-dev.tgz --tag=dev"
+PUBLISH="npm pub parsegraph-matrix-prod.tgz"
 $PUBLISH && exit
 for try in `seq 1 3`; do
     sleep $try
