@@ -151,7 +151,7 @@ export function matrixTransform2D(
   world: Matrix3x3,
   x: number,
   y: number
-): Matrix3x3 {
+): [number, number] {
   return [
     world[0] * x + world[1] * y + world[2],
     world[3] * x + world[4] * y + world[5],
