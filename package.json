@@ -1,6 +1,6 @@
 {
   "name": "parsegraph-matrix",
-  "version": "1.4.15",
+  "version": "1.4.16",
   "description": "matrix",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
